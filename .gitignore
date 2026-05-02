@@ -1,0 +1,8 @@
+config/paths.xml
+sampleLogs/
+logs/
+.idea/
+venv/
+utils/__pycache__/
+__pycache__/
+*.pyc
