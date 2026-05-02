@@ -1,6 +1,6 @@
 # 📦 Zippy
 
-A Python-based log file management tool that automatically generates sample log files and compresses selected logs into a ZIP archive via a GUI interface.
+[Alten-Korea] A Python-based log file management tool that automatically generates sample log files and compresses selected logs into a ZIP archive via a GUI interface.
 
 > ⚠️ **Note:** Real log files are confidential. This project automatically generates sample log files for demonstration purposes, simulating a real-world log management workflow.
 
