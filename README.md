@@ -9,6 +9,7 @@ A Python-based log file management tool that automatically generates sample log 
 ## 📌 Overview
 
 Zippy simulates a log file management system used in embedded or system-level environments. It automates the process of organizing, filtering, and compressing log files — tasks that are common in real-world QA and system diagnostics workflows.
+Period: March 2025 ~ June 2026
 
 ---
 
