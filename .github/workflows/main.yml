@@ -1,0 +1,21 @@
+name: Run Zippy
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+
+      - name: Python setting
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9.13'
+
+      - name: Run script
+        run: python main.py

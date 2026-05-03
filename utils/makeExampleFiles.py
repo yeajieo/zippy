@@ -4,6 +4,8 @@ import os
 import shutil
 from utils.makeAppLog import setup_logger
 logger = setup_logger()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_DIR = os.path.join(BASE_DIR, "..", "config")
 
 class ExampleFileCreator:
     def __init__(self):
@@ -32,7 +34,8 @@ class ExampleFileCreator:
 
     def load_paths(self):
         logger.info("=========== START")
-        tree = ET.parse("config/paths.xml")
+        # tree = ET.parse("config/paths.xml")
+        tree = ET.parse(os.path.join(CONFIG_DIR, "paths.xml"))
         root = tree.getroot()
         self.paths = {p.attrib["name"]: p.text for p in root.findall("path")}
         logger.info("=========== END")
@@ -40,7 +43,8 @@ class ExampleFileCreator:
 
     def load_datetime(self):
         logger.info("=========== START")
-        tree = ET.parse("config/date.xml")
+        # tree = ET.parse("config/date.xml")
+        tree = ET.parse(os.path.join(CONFIG_DIR, "date.xml"))
         root = tree.getroot()
         self.dt = [root.find(tag).text for tag in ["year", "month", "day", "hour", "minute", "second"]]
         logger.info("=========== END")
