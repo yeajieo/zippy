@@ -1,21 +1,21 @@
 name: Run Zippy
 
-# ── Setup Trigger ──────────────────────────────
+# ── Setup Trigger ────────────────────────────────
 on:
   push:
-    branches: [ master ]          # only these branches
+    branches: [ master ]              # only these branches
     # paths:
-    #   - '**.py'                 # only when .py files are changed
+    #   - '**.py'                     # only when .py files are changed
     # 'paths' is useful to avoid wasting CI minutes.
 
   pull_request:
-    branches: [ master ]          # only these branches
+    branches: [ master ]              # only these branches
 
   schedule:
-    - cron: "10 13 * * 6-7"       # 주말 9시
-    # https://crontab.guru/#0_9
+    - cron: "10 13 * * 6-7"           # 주말 22시 KST
+    # https://crontab.guru/#10_13_*_*_6-7
 
-  workflow_dispatch:               # Click the Run workflow button manually.
+  workflow_dispatch:                   # Click the Run workflow button manually.
     inputs:
       log_date:
         description: 'Date (YYYY-MM-DD)'
@@ -33,27 +33,27 @@ on:
           - INFO
           - DEBUG
 
-# ── Setup implement ────────────────────────────────
+# ── Setup implement ──────────────────────────────
 jobs:
   run:
     runs-on: ubuntu-latest
 
-# ── Steps ────────────────────────────────
+    # ── Steps ────────────────────────────────
     steps:
-      - name: Code checkout         # to server
+      - name: Code checkout             # to server
         uses: actions/checkout@v4
 
-      - name: Python setting        # python version
+      - name: Python setting            # python version
         uses: actions/setup-python@v5
         with:
           python-version: '3.9.13'
 
-      #- name: installation package
-      #  run: pip install -r requirements.txt
+      # - name: Install packages
+      #   run: pip install -r requirements.txt
 
-      - name: Run script (manual button)
+      - name: Run script
         run: |
-          python zippy.py \
+          python main.py \
             --date ${{ github.event.inputs.log_date }} \
             --debug ${{ github.event.inputs.debug_mode }} \
             --env ${{ github.event.inputs.environment }}
