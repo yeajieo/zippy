@@ -1,5 +1,10 @@
 name: Run Zippy
 
+env:
+  DEFAULT_OUTPUT_PATH: './sampleLogs'
+  DEFAULT_DATE: '2026-05-02'
+  DEFAULT_TIME: '11-15-00'
+
 on:
   push:
     branches: [ master ]
@@ -8,17 +13,14 @@ on:
       output_path:
         description: '출력 폴더 경로'
         required: true
-        default: './sampleLogs'
         type: string
       date:
         description: '날짜 (YYYY-MM-DD)'
         required: true
-        default: '2026-05-02'
         type: string
       time:
         description: '시간 (HH-MM-SS)'
         required: true
-        default: '11-15-00'
         type: string
 
 jobs:
@@ -36,6 +38,6 @@ jobs:
       - name: Run script
         run: |
           python main_ci.py \
-            --output_path "${{ github.event.inputs.output_path }}" \
-            --date "${{ github.event.inputs.date }}" \
-            --time "${{ github.event.inputs.time }}"
+            --output_path "${{ github.event.inputs.output_path || env.DEFAULT_OUTPUT_PATH }}" \
+            --date "${{ github.event.inputs.date || env.DEFAULT_DATE }}" \
+            --time "${{ github.event.inputs.time || env.DEFAULT_TIME }}"
