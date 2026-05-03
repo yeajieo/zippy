@@ -40,7 +40,7 @@ if __name__ == '__main__':
     else:
         logger.info(f"No log files.")
     logger.info("=========== END")
-    print("last")
+
     pass
 
 
