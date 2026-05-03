@@ -13,7 +13,7 @@ on:
       date:
         description: '날짜 (YYYY-MM-DD)'
         required: true
-        default: '2025-05-02'
+        default: '2026-05-02'
         type: string
       time:
         description: '시간 (HH-MM-SS)'

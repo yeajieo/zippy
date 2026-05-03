@@ -1,0 +1,27 @@
+2026-05-03 22:00:58,270 - INFO - main_ci.py::<module> - =========== START
+2026-05-03 22:00:58,271 - INFO - makeExampleFiles.py::load_paths - =========== START
+2026-05-03 22:00:58,271 - INFO - makeExampleFiles.py::load_paths - =========== END
+2026-05-03 22:00:58,271 - INFO - makeExampleFiles.py::load_datetime - =========== START
+2026-05-03 22:00:58,272 - INFO - makeExampleFiles.py::load_datetime - =========== END
+2026-05-03 22:00:58,272 - INFO - makeExampleFiles.py::makeSampleFolder - =========== START
+2026-05-03 22:00:58,291 - DEBUG - makeExampleFiles.py::makeSampleFolder - Success for making new sample dir.
+2026-05-03 22:00:58,291 - INFO - makeExampleFiles.py::makeSampleFolder - =========== END
+2026-05-03 22:00:58,292 - INFO - makeExampleFiles.py::create_allFiles - =========== START
+2026-05-03 22:00:58,292 - DEBUG - makeExampleFiles.py::create_allFiles - Start making .log.gz
+2026-05-03 22:00:58,314 - DEBUG - makeExampleFiles.py::create_allFiles - End making .log.gz
+2026-05-03 22:00:58,314 - DEBUG - makeExampleFiles.py::create_allFiles - Start making .log/.txt
+2026-05-03 22:00:58,317 - DEBUG - makeExampleFiles.py::create_allFiles - End making .log/.txt
+2026-05-03 22:00:58,317 - DEBUG - makeExampleFiles.py::create_allFiles - Start making .dir
+2026-05-03 22:00:58,318 - DEBUG - makeExampleFiles.py::create_allFiles - End making .dir
+2026-05-03 22:00:58,319 - INFO - makeExampleFiles.py::create_allFiles - =========== END
+2026-05-03 22:00:58,323 - INFO - makeZip.py::makeWorkspaceFolder - =========== START
+2026-05-03 22:00:58,326 - DEBUG - makeZip.py::makeWorkspaceFolder - Success for deleting Workspace dir.
+2026-05-03 22:00:58,326 - DEBUG - makeZip.py::makeWorkspaceFolder - Success for making new Workspace dir.
+2026-05-03 22:00:58,327 - INFO - makeZip.py::makeWorkspaceFolder - =========== END
+2026-05-03 22:00:58,327 - INFO - makeZip.py::exporting - =========== START
+2026-05-03 22:00:58,388 - DEBUG - makeZip.py::exporting - Done - check the format of files.
+2026-05-03 22:00:58,388 - INFO - makeZip.py::exporting - =========== END
+2026-05-03 22:00:58,388 - INFO - makeZip.py::zipping - =========== START
+2026-05-03 22:00:58,399 - INFO - makeZip.py::zipping - =========== END
+2026-05-03 22:00:58,400 - INFO - main_ci.py::<module> - All process is successfully done.
+2026-05-03 22:00:58,400 - INFO - main_ci.py::<module> - =========== END
