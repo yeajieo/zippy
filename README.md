@@ -1,141 +1,148 @@
-# 📦 Zippy
+# 🗜️ Zippy
 
-[Alten-Korea] A Python-based log file management tool that automatically generates sample log files and compresses selected logs into a ZIP archive via a GUI interface.
-
-> ⚠️ **Note:** Real log files are confidential. This project automatically generates sample log files for demonstration purposes, simulating a real-world log management workflow.
+A desktop GUI tool that collects and zips log files based on a target datetime.  
+Also supports headless CI execution via command-line arguments.
 
 ---
 
 ## 📌 Overview
 
-- Zippy simulates a log file management system used in embedded or system-level environments. It automates the process of organizing, filtering, and compressing log files — tasks that are common in real-world QA and system diagnostics workflows.
-- Period: March 2025 ~ June 2026
-
----
-
-## 🔄 Workflow
-
-```
-1. Load configuration (paths.xml, date.xml)
-        ↓
-2. Auto-generate sample log files
-        ↓
-3. Launch GUI — user selects a log folder
-        ↓
-4. Filter and compress selected logs into a .zip file
-```
-
----
-
-## 🗂️ Project Structure
-
-```
-zippy/
-├── config/
-│   ├── paths.xml            # Path configuration
-│   └── date.xml             # Date/time configuration
-├── utils/
-│   ├── makeExampleFiles.py  # Sample log file generator
-│   ├── makeGUI.py           # GUI (tkinter)
-│   ├── makeZip.py           # ZIP compression
-│   └── makeAppLog.py        # Logger setup
-├── logs/                    # App execution logs (auto-generated)
-├── sampleLogs/              # Generated sample log files (auto-generated)
-├── .gitignore
-└── main.py                  # Entry point
-```
+Zippy scans a specified folder for log files, filters `.log.gz` files (main logs only) within a **±3~6 minute window** around the given datetime, copies them alongside all `.log` / `.txt` files into a workspace, and packages everything into a single ZIP file.
 
 ---
 
 ## ✨ Features
 
-- **Auto-generates sample log files** — `.log.gz`, `.log`, `.txt` files based on XML config
-- **XML-based configuration** — paths and date/time settings managed separately
-- **GUI folder selection** — users select a log folder via a tkinter interface
-- **ZIP compression** — selected log folder is compressed into a `.zip` file
-- **Structured logging** — execution logs saved per run with timestamps (`logs/app_YYYY_MM_DD_HH_MM_SS.log`)
-- **OOP design** — each utility is encapsulated in a class
+- 🖥️ **GUI mode** — Browse folder, enter date/time, and click Run (`main.py`)
+- ⚙️ **CI mode** — Run headlessly with `--output_path`, `--date`, `--time` args (`main_ci.py`)
+- 🔍 **Time-based filtering** — Collects `.gz` main logs within a ±3~6 min window of the target time
+- 📦 **Auto ZIP** — Outputs a `XXXXLogs_YYMMDD_HHMM.zip` file to the target folder
+- 🧪 **Sample file generator** — Auto-generates realistic sample log files for testing
+- 📝 **App logging** — Timestamped log files written to `logs/` on every run
+- 🔄 **GitHub Actions** — CI workflow triggers on push/PR, with manual `workflow_dispatch` support
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Language:** Python 3.9
-- **GUI:** tkinter
-- **Libraries:** `gzip`, `zipfile`, `xml.etree.ElementTree`, `logging`, `os`, `shutil`, `datetime`
+| Category | Detail |
+|----------|--------|
+| Language | Python 3.9 |
+| GUI | Tkinter |
+| Compression | `zipfile`, `gzip` |
+| Config | XML (`paths.xml`, `date.xml`) |
+| Logging | Python `logging` module |
+| CI/CD | GitHub Actions |
 
 ---
 
-## ⚙️ Configuration
+## 📂 Project Structure
 
-### config/paths.xml
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <path name="mainPath">.</path>
-    <path name="output">sampleLogs</path>
-</paths>
 ```
-
-### config/date.xml
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<datetime>
-    <year>2026</year>
-    <month>5</month>
-    <day>1</day>
-    <hour>11</hour>
-    <minute>0</minute>
-    <second>0</second>
-</datetime>
+zippy/
+├── main.py                  # GUI entry point
+├── main_ci.py               # CI/headless entry point
+├── requirements.txt
+├── config/
+│   ├── paths.xml            # Input/output path config
+│   └── date.xml             # Default datetime config for sample generation
+├── utils/
+│   ├── makeGUI.py           # Tkinter GUI (InputGUI class)
+│   ├── makeZip.py           # Core logic: filter, copy, zip (zipFileCreator class)
+│   ├── makeExampleFiles.py  # Sample log file generator
+│   └── makeAppLog.py        # App logger setup
+└── .github/
+    └── workflows/
+        └── main.yml         # GitHub Actions CI workflow
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-**1. Clone the repository**
+### Prerequisites
+
+- Python 3.9+
+- Tkinter (bundled with standard Python)
+
+### Installation
+
 ```bash
 git clone https://github.com/yeajieo/zippy.git
 cd zippy
+pip install -r requirements.txt
 ```
 
-**2. Set up config files**
-```bash
-# Edit config/paths.xml and config/date.xml as needed
-```
+---
 
-**3. Run**
+## ▶️ Usage
+
+### GUI mode
+
 ```bash
 python main.py
 ```
 
----
+1. Click **Search** to select the folder containing log files
+2. Enter the target **Date** (`YYYY-MM-DD`) and **Time** (`HH:MM`)
+3. Click **Run**
+4. Find the output `XXXXLogs_YYMMDD_HHMM.zip` in the selected folder
 
-## 📋 Sample Log Files Generated
+### CI / Headless mode
 
-| Type | Example |
-|------|---------|
-| `.log.gz` | `1-main.log_2026_5_1_11_1_01.log.gz` |
-| `.log` | `bootup.log`, `crash.log`, `system.log` |
-| `.txt` | `calibration_values.txt` |
-| Directory | `CLU/`, `Cali/`, `Sync/` |
-
----
-
-## 📝 Logging
-
-Every run generates a timestamped log file under `logs/`:
-
-```
-2026-05-02 11:00:00 - INFO - makeExampleFiles.py::load_paths - Config loaded successfully
-2026-05-02 11:00:00 - INFO - makeExampleFiles.py::create_allFiles - All files created successfully
-2026-05-02 11:00:01 - INFO - makeZip.py::makeZip - ZIP created successfully
+```bash
+python main_ci.py \
+  --output_path ./sampleLogs \
+  --date 2026-05-02 \
+  --time 11-15-00
 ```
 
 ---
 
-## 🔒 Security
+## 🔄 GitHub Actions
 
-- `config/paths.xml` is excluded from version control via `.gitignore` to prevent local path exposure
-- Sample files replace real log data to protect confidential system information
+The workflow runs automatically on push or PR to `master`, and can also be triggered manually via **Actions → Run workflow** with custom inputs.
+
+| Input | Description | Example |
+|-------|-------------|---------|
+| `output_path` | Target folder path | `./sampleLogs` |
+| `date` | Target date | `2026-05-02` |
+| `time` | Target time | `11-15-00` |
+
+---
+
+## 🧪 Sample Log Files
+
+On every run, Zippy auto-generates sample files under `./sampleLogs/` so the tool can be tested immediately:
+
+- 30 × `.log.gz` files (main & system logs, 1-min intervals)
+- 10 standalone files: `bootup.log`, `crash.log`, `kernel.log`, `main.log`, etc.
+- 3 subdirectories: `CLU/`, `Cali/`, `Sync/`
+
+---
+
+## ⚙️ Configuration
+
+**`config/paths.xml`** — Set input/output folder paths
+
+```xml
+<paths>
+    <path name="main">.</path>
+    <path name="output">./sampleLogs</path>
+</paths>
+```
+
+**`config/date.xml`** — Set default datetime for sample file generation
+
+```xml
+<datetime>
+    <year>2026</year><month>5</month><day>2</day>
+    <hour>11</hour><minute>0</minute><second>0</second>
+</datetime>
+```
+
+---
+
+## 👩‍💻 Author
+
+**yeajieo** · [@yeajieo](https://github.com/yeajieo)
