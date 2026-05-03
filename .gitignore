@@ -1,5 +1,3 @@
-sampleLogs/
-logs/
 .idea/
 venv/
 utils/__pycache__/
