@@ -12,7 +12,7 @@ on:
     branches: [ master ]          # only these branches
 
   schedule:
-    - cron: '0 12 * * 6-7'        # 주말 9시
+    - cron: "10 13 * * 6-7"       # 주말 9시
     # https://crontab.guru/#0_9
 
   workflow_dispatch:               # Click the Run workflow button manually.
