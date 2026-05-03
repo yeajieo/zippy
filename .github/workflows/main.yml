@@ -6,8 +6,8 @@ env:
   DEFAULT_TIME: '11-15-00'
 
 on:
-  push:
-    branches: [ master ]
+  #push:
+  #  branches: [ master ]
   pull_request:
     branches: [ master ]
   workflow_dispatch:
