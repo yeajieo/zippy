@@ -11,8 +11,8 @@ on:
   pull_request:
     branches: [ master ]              # only these branches
 
-  schedule:
-    - cron: "10 13 * * 6-7"           # 주말 22시 KST
+  #schedule:
+  #  - cron: "10 13 * * 6-7"           # 주말 22시 KST
     # https://crontab.guru/#10_13_*_*_6-7
 
   workflow_dispatch:                   # Click the Run workflow button manually.
