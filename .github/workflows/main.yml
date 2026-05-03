@@ -36,6 +36,6 @@ jobs:
       - name: Run script
         run: |
           python main_ci.py \
-            --output_path ${{ github.event.inputs.output_path }} \
-            --date ${{ github.event.inputs.date }} \
-            --time ${{ github.event.inputs.time }}
+            --output_path "${{ github.event.inputs.output_path }}" \
+            --date "${{ github.event.inputs.date }}" \
+            --time "${{ github.event.inputs.time }}"
