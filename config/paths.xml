@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--
+    <path name="main">C:\Users\admin\Documents\zippy\</path>
+    <path name="output">C:\Users\admin\Documents\zippy\sampleLogs</path>
+    -->
+    <path name="main">.</path>
+    <path name="output">./sampleLogs</path>
+</paths>

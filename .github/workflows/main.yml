@@ -1,0 +1,59 @@
+name: Run Zippy
+
+# ── Setup Trigger ──────────────────────────────
+on:
+  push:
+    branches: [ master ]          # only these branches
+    # paths:
+    #   - '**.py'                 # only when .py files are changed
+    # 'paths' is useful to avoid wasting CI minutes.
+
+  pull_request:
+    branches: [ master ]          # only these branches
+
+  schedule:
+    - cron: '0 12 * * 6-7'        # 주말 9시
+    # https://crontab.guru/#0_9
+
+  workflow_dispatch:               # Click the Run workflow button manually.
+    inputs:
+      log_date:
+        description: 'Date (YYYY-MM-DD)'
+        required: true
+        default: '2025-05-03'
+        type: string
+      compress:
+        description: 'Compress or not'
+        type: boolean
+        default: true
+      log_level:
+        description: 'log level'
+        type: choice
+        options:
+          - INFO
+          - DEBUG
+
+# ── Setup implement ────────────────────────────────
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+# ── Steps ────────────────────────────────
+    steps:
+      - name: Code checkout         # to server
+        uses: actions/checkout@v4
+
+      - name: Python setting        # python version
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9.13'
+
+      #- name: installation package
+      #  run: pip install -r requirements.txt
+
+      - name: Run script (manual button)
+        run: |
+          python zippy.py \
+            --date ${{ github.event.inputs.log_date }} \
+            --debug ${{ github.event.inputs.debug_mode }} \
+            --env ${{ github.event.inputs.environment }}
