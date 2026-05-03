@@ -1,4 +1,4 @@
-yamlname: Run Zippy
+name: Run Zippy
 
 on:
   push:
