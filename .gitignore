@@ -1,6 +1,7 @@
 .idea/
 logs/
 sampleLogs/
+
 venv/
 utils/__pycache__/
 __pycache__/
